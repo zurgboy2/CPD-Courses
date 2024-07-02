@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', fetchCourses);
 
 function fetchCourses() {
-  fetch('https://script.google.com/macros/s/AKfycbzoZCalGB_Zvxe0eIoF-XTO-Oh2d1HiQ8dr0FYc4adF3_L_9MzFLH34czV0O_aHmtTW0Q/exec')
-    .then(response => response.json())
-    .then(courses => displayCourses(courses));
+  const script = document.createElement('script');
+  script.src = 'YOUR_GOOGLE_APP_SCRIPT_WEB_APP_URL?callback=displayCourses';
+  document.body.appendChild(script);
 }
 
 function displayCourses(courses) {
