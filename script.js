@@ -2,25 +2,30 @@ document.addEventListener('DOMContentLoaded', fetchCourses);
 
 function fetchCourses() {
   const script = document.createElement('script');
-  script.src = 'https://script.google.com/macros/s/AKfycbzoZCalGB_Zvxe0eIoF-XTO-Oh2d1HiQ8dr0FYc4adF3_L_9MzFLH34czV0O_aHmtTW0Q/exec?callback=displayCourses';
+  script.src = 'YOUR_DEPLOYMENT_URL?callback=displayCourses';
   document.body.appendChild(script);
 }
 
-function displayCourses(courses) {
+function displayCourses(coursesByHost) {
   const courseContainer = document.getElementById('courses');
   courseContainer.innerHTML = '';
-  courses.forEach(course => {
-    const courseElement = document.createElement('div');
-    courseElement.className = 'course';
-    courseElement.innerHTML = `
-      <img src="${course.link}" alt="Course Thumbnail">
-      <h3>${course.name}</h3>
-      <p>${course.hours} hours</p>
-      <a href="${course.link}" target="_blank">Go to Course</a>
-      <a href="#" onclick="showCertificate('${course.certificate}')">View Certificate</a>
-    `;
-    courseContainer.appendChild(courseElement);
-  });
+  for (const host in coursesByHost) {
+    const hostElement = document.createElement('section');
+    hostElement.innerHTML = `<h2>${host}</h2>`;
+    coursesByHost[host].forEach(course => {
+      const courseElement = document.createElement('div');
+      courseElement.className = 'course';
+      courseElement.innerHTML = `
+        <h3>${course.name}</h3>
+        <p>${course.hours} hours</p>
+        <a href="${course.link}" target="_blank">Go to Course</a>
+        <a href="#" onclick="showCertificate('${course.certificate}')">View Certificate</a>
+        <p>Date Added: ${course.date}</p>
+      `;
+      hostElement.appendChild(courseElement);
+    });
+    courseContainer.appendChild(hostElement);
+  }
 }
 
 function showCertificate(url) {
