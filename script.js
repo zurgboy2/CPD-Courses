@@ -13,6 +13,10 @@ function displayCourses(coursesByHost) {
   for (const host in coursesByHost) {
     const hostElement = document.createElement('section');
     hostElement.innerHTML = `<h2>${host}</h2>`;
+    
+    const cardsContainer = document.createElement('div');
+    cardsContainer.className = 'cards-container';
+
     coursesByHost[host].forEach(course => {
       const courseElement = document.createElement('div');
       courseElement.className = 'course';
@@ -23,8 +27,10 @@ function displayCourses(coursesByHost) {
         <a href="#" onclick="showCertificate('${course.certificate}')">View Certificate</a>
         <p>Date Added: ${course.date}</p>
       `;
-      hostElement.appendChild(courseElement);
+      cardsContainer.appendChild(courseElement);
     });
+
+    hostElement.appendChild(cardsContainer);
     courseContainer.appendChild(hostElement);
   }
 }
