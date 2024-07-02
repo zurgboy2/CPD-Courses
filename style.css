@@ -14,8 +14,12 @@ header {
 main {
   padding: 1rem;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+section {
+  width: 100%;
+  margin-bottom: 1rem;
 }
 .course {
   background: #fff;
@@ -26,11 +30,6 @@ main {
   max-width: 300px;
   text-align: center;
   border-radius: 8px;
-}
-.course img {
-  max-width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
 }
 .course h3 {
   margin: 0.5rem 0;
